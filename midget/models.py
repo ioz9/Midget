@@ -12,6 +12,8 @@ from sqlalchemy import Column, Integer, Unicode
 
 from zope.sqlalchemy import ZopeTransactionExtension
 
+from midget.lib import base36decode
+
 DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 Base = declarative_base()
 
@@ -33,11 +35,11 @@ class Root(object):
     def __getitem__(self, key):
         session= DBSession()
         try:
-            id = int(key)
-        except (ValueError, TypeError):
+            id = base36decode(key)
+        except:
             raise KeyError(key)
 
-        query = session.query(MyModel).filter_by(id=id)
+        query = session.query(ShortURL).filter_by(id=id)
 
         try:
             item = query.one()
@@ -56,7 +58,7 @@ class Root(object):
 
     def __iter__(self):
         session= DBSession()
-        query = session.query(MyModel)
+        query = session.query(ShortURL)
         return iter(query)
 
 def initialize_sql(engine):

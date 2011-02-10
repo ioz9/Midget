@@ -1,5 +1,7 @@
-def view_root(context, request):
-    return {'items':list(context), 'project':'Midget'}
+from pyramid.httpexceptions import HTTPFound
 
-def view_model(context, request):
-    return {'item':context, 'project':'Midget'}
+def index(request):
+    return Response("index")
+
+def redirect(context, request):
+    return HTTPFound(location=context.url)
