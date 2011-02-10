@@ -14,7 +14,7 @@ def main(global_config, **settings):
     config = Configurator(settings=settings, root_factory=root_factory)
 
     # Add the default view and dynamic view.
-    config.add_view('midget.views.index', context='midget.models.Root')
+    config.add_view('midget.views.index', renderer='index.mako')
     config.add_view('midget.views.redirect', context='midget.models.ShortURL')
 
     # Return application
