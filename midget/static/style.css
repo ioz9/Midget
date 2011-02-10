@@ -1,0 +1,36 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #f0f0f0 url('/static/grass.jpg');
+}
+
+div#sky {
+    text-align: center;
+    padding: 100px 0 0 0;
+    background: #AFD7EE url('/static/sky.jpg') top right no-repeat;
+    border-bottom: 2px solid black;
+}
+
+img#duck {
+    position: relative;
+    top: 50px;
+}
+
+div#container {
+    width: 256px;
+    margin: 0 auto;
+    padding: 10px;
+    border: 2px solid black;
+    background: #fff;
+    opacity: 0.8;
+    margin-top: 60px;
+}
+
+div#container div {
+    color: #000000;
+}
+
+div#container div input {
+    border: 1px solid black;
+    padding: 2px;
+}
