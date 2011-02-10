@@ -49,6 +49,8 @@ class Root(object):
             return item
         except NoResultFound:
             raise KeyError(key)
+        finally:
+            DBSession.remove()
 
     def get(self, key, default=None):
         try:
@@ -60,6 +62,7 @@ class Root(object):
     def __iter__(self):
         session= DBSession()
         query = session.query(ShortURL)
+        DBSession.remove()
         return iter(query)
 
 def initialize_sql(engine):
