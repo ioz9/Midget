@@ -8,27 +8,22 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import NoResultFound
 
-from sqlalchemy import create_engine
-from sqlalchemy import Integer
-from sqlalchemy import Unicode
-from sqlalchemy import Column
+from sqlalchemy import Column, Integer, Unicode
 
 from zope.sqlalchemy import ZopeTransactionExtension
 
 DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 Base = declarative_base()
 
-class MyModel(Base):
-    __tablename__ = 'models'
+class ShortURL(Base):
+    __tablename__ = 'urls'
     id = Column(Integer, primary_key=True)
-    name = Column(Unicode(255), unique=True)
-    value = Column(Integer)
+    url = Column(Unicode(1000))
 
-    def __init__(self, name, value):
-        self.name = name
-        self.value = value
+    def __init__(self, url):
+        self.url = url
 
-class MyApp(object):
+class Root(object):
     __name__ = None
     __parent__ = None
 
@@ -61,27 +56,11 @@ class MyApp(object):
         query = session.query(MyModel)
         return iter(query)
 
-root = MyApp()
-
-def default_get_root(request):
-    return root
-
-def populate():
-    session = DBSession()
-    model = MyModel(name=u'test name', value=55)
-    session.add(model)
-    session.flush()
-    transaction.commit()
-
 def initialize_sql(engine):
     DBSession.configure(bind=engine)
     Base.metadata.bind = engine
     Base.metadata.create_all(engine)
-    try:
-        populate()
-    except IntegrityError:
-        DBSession.rollback()
 
-def appmaker(engine):
+def root_factory_maker(engine):
     initialize_sql(engine)
-    return default_get_root
+    return Root

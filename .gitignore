@@ -1,2 +1,3 @@
 Midget.egg-info/*
-.pyc
+*.pyc
+*.db
