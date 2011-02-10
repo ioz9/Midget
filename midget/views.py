@@ -21,6 +21,8 @@ def api(request):
     parsed = urlparse.urlparse(url)
     if parsed.scheme not in ('http', 'https'):
         return Response('Invalid URL', status_int=503)
+    elif parsed.netloc in ('www.kan.gd', 'kan.gd', 'kanged.net', 'www.kanged.net'):
+        return Response('Invalid URL - This one would cause some issues ;)', status_int=503)
 
     try:
         session = DBSession()

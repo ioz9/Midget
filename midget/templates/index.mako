@@ -12,7 +12,7 @@
                     var url = $('input[type=text]').val();
                     $('#result').css("text-align", "center");
 
-                    $.get('/api?url=' + url, function(data) {
+                    $.post('/api', {url: url}, function(data) {
                         $('#result').html('<a href="'+ data +'">'+data+'</a>');
                     })
                     .error(function(data) { $('#result').html(data.responseText); });
