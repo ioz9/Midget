@@ -14,7 +14,8 @@ from zope.sqlalchemy import ZopeTransactionExtension
 
 from midget.lib import base36decode
 
-DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
+#DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
+DBSession = scoped_session(sessionmaker())
 Base = declarative_base()
 
 class ShortURL(Base):

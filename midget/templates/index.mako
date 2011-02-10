@@ -10,7 +10,12 @@
                 $('input[type=text]').focus(function(){ $(this).val(''); });
                 $('input[type=submit]').click(function() {
                     var url = $('input[type=text]').val();
-                    alert(url);
+                    $('#result').css("text-align", "center");
+
+                    $.get('/api?url=' + url, function(data) {
+                        $('#result').html('<a href="'+ data +'">'+data+'</a>');
+                    })
+                    .error(function(data) { $('#result').html(data.responseText); });
                 });
             });
         </script>
@@ -22,7 +27,7 @@
         </div>
 
         <div id="container">
-            <div>
+            <div id="result">
                 <input type="text" name="url" value="Enter URL" />
                 <input type="submit" value="Create" />
             </div>
