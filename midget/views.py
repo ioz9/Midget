@@ -34,4 +34,7 @@ def api(request):
     # Encode the primary key.
     key = base36encode(obj.id)
 
+    # Remove the session.
+    DBSession.remove()
+
     return Response('http://kan.gd/%s' % key)
