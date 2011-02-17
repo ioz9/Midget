@@ -4,7 +4,7 @@ body {
     background: #f0f0f0 url('/static/grass.jpg');
 }
 
-div#sky {
+section#sky {
     text-align: center;
     padding: 100px 0 0 0;
     background: #AFD7EE url('/static/sky.jpg') top right no-repeat;
@@ -16,7 +16,7 @@ img#duck {
     top: 50px;
 }
 
-div#container {
+section#container {
     width: 256px;
     margin: 0 auto;
     padding: 10px;
@@ -26,11 +26,11 @@ div#container {
     margin-top: 60px;
 }
 
-div#container div {
+section#container section {
     color: #000000;
 }
 
-div#container div input {
+section#container section input {
     border: 1px solid black;
     padding: 2px;
 }

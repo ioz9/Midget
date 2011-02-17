@@ -1,6 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
         <title>kan.gd URL shortner</title>
         <link rel="stylesheet" href="/static/style.css" type="text/css" />
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
@@ -24,17 +25,17 @@
     </head>
 
     <body>
-        <div id="sky">
+        <section id="sky">
             <img id="duck" src="/static/duck256.png" />
-        </div>
+        </section>
 
-        <div id="container">
-            <div id="result">
+        <section id="container">
+            <section id="result">
                 <form id="form">
                     <input type="text" name="url" value="Enter URL" />
                     <input type="submit" value="Create" />
                 </form>
-            </div>
-        </div>
+            </section>
+        </section>
     </body>
 </html>
