@@ -15,13 +15,13 @@ requires = [
     'WebError',
     ]
 
-if sys.version_info[:3] < (2,5,0):
+if sys.version_info[:3] < (2, 5, 0):
     requires.append('pysqlite')
 
 setup(name='Midget',
-      version='0.2',
+      version='0.3',
       description='Midget',
-      long_description=README + '\n\n' +  CHANGES,
+      long_description=README + '\n\n' + CHANGES,
       classifiers=[
         "Programming Language :: Python",
         "Framework :: Pylons",
@@ -35,10 +35,10 @@ setup(name='Midget',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
-      install_requires = requires,
-      tests_require = requires,
+      install_requires=requires,
+      tests_require=requires,
       test_suite="midget",
-      entry_points = """\
+      entry_points="""\
       [paste.app_factory]
       main = midget:main
       """,
