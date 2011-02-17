@@ -2,18 +2,16 @@ from midget.models import root_factory_maker, DBSession
 from pyramid.config import Configurator
 from sqlalchemy import engine_from_config
 
-__version__ = '0.8'
+__version__ = '0.9'
 
 class SessionRemoverMiddleware(object):
     def __init__(self, app):
         self.app = app
 
     def __call__(self, *args, **kwargs):
-        session = DBSession()
         try:
             return self.app(*args, **kwargs)
         finally:
-            session.close()
             DBSession.remove()
 
 def main(global_config, **settings):

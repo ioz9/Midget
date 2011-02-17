@@ -22,7 +22,6 @@ def api(request):
         return Response('Invalid URL - This one would cause some issues ;)', status_int=503)
 
     try:
-        session = DBSession()
         obj = ShortURL(url)
         session.add(obj)
         session.commit()
@@ -32,5 +31,9 @@ def api(request):
 
     # Encode the primary key.
     key = base36encode(obj.id)
+
+    # Ensure the session is completely closed.
+    session.commit()
+    session.close()
 
     return Response('http://kan.gd/%s' % key)
