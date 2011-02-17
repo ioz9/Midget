@@ -4,44 +4,28 @@ import sys
 from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
-README = open(os.path.join(here, 'README.txt')).read()
-CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
+sys.path.insert(0, os.path.join(here, 'src'))
+
+from midget import __version__
 
 requires = [
     'pyramid',
-    'repoze.tm2>=1.0b1', # default_commit_veto
     'sqlalchemy',
-    'zope.sqlalchemy',
     'WebError',
-    ]
-
-if sys.version_info[:3] < (2, 5, 0):
-    requires.append('pysqlite')
+    "nose"]
 
 setup(name='Midget',
-      version='0.5',
-      description='Midget',
-      long_description=README + '\n\n' + CHANGES,
-      classifiers=[
-        "Programming Language :: Python",
-        "Framework :: Pylons",
-        "Topic :: Internet :: WWW/HTTP",
-        "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
-        ],
-      author='',
-      author_email='',
-      url='',
-      keywords='web pylons pyramid',
+      version=__version__,
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
       install_requires=requires,
       tests_require=requires,
-      test_suite="midget",
+      test_suite="nose.collector",
       entry_points="""\
       [paste.app_factory]
       main = midget:main
       """,
       paster_plugins=['pyramid'],
-      )
+)
 
