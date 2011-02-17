@@ -1,3 +1,4 @@
+from midget.cache import cache
 from midget.lib import base36decode
 from sqlalchemy import Column, Integer, Unicode
 from sqlalchemy.ext.declarative import declarative_base
@@ -15,6 +16,22 @@ class ShortURL(Base):
     def __init__(self, url):
         self.url = url
 
+    @classmethod
+    def get(cls, id):
+        urlcache = cache.get_cache('urlcache', expire=5 * 60)
+
+        try:
+            id = base36decode(id)
+        except:
+                raise NoResultFound
+
+        def get_from_database():
+            session = DBSession()
+            query = session.query(cls).get(id)
+            return query
+
+        return urlcache.get(id, createfunc=get_from_database)
+
 class Root(object):
     __name__ = None
     __parent__ = None
@@ -23,23 +40,19 @@ class Root(object):
         self.request = request
 
     def __getitem__(self, key):
-        session = DBSession()
-        try:
-            id = base36decode(key)
-        except:
-            raise KeyError(key)
-
-        query = session.query(ShortURL).filter_by(id=id)
+        # Do not bother querying the database for 'api'.
+        if key == "api":
+            raise KeyError
+        if key == "favicon.ico":
+            raise KeyError
 
         try:
-            item = query.one()
+            item = ShortURL.get(key)
             item.__parent__ = self
             item.__name__ = key
             return item
-        except NoResultFound:
-            raise KeyError(key)
-        finally:
-            DBSession.remove()
+        except Exception, e:
+            raise KeyError
 
     def get(self, key, default=None):
         try:
@@ -51,7 +64,6 @@ class Root(object):
     def __iter__(self):
         session = DBSession()
         query = session.query(ShortURL)
-        DBSession.remove()
         return iter(query)
 
 def initialize_sql(engine):

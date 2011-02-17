@@ -8,13 +8,11 @@ def index(request):
     return {}
 
 def redirect(context, request):
+    return Response(context.url)
     return HTTPFound(location=context.url)
 
 def api(request):
-    # Grab a session from sessionmaker.
     session = DBSession()
-
-    # Grab url from querystring.
     url = request.params.get('url', '')
 
     # Check that the url is good (this is dirty hax, should use a regex)
@@ -35,8 +33,5 @@ def api(request):
 
     # Encode the primary key.
     key = base36encode(obj.id)
-
-    # Remove the session.
-    DBSession.remove()
 
     return Response('http://kan.gd/%s' % key)
