@@ -31,6 +31,6 @@ def main(global_config, **settings):
     config.add_view('midget.views.redirect', context='midget.models.ShortURL')
 
     # Return application
-    return config.make_wsgi_app()
+    return SessionRemoverMiddleware(config.make_wsgi_app())
 
 
