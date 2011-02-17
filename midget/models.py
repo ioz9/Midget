@@ -1,20 +1,9 @@
-import transaction
-
-from sqlalchemy.orm import scoped_session
-from sqlalchemy.orm import sessionmaker
-
+from midget.lib import base36decode
+from sqlalchemy import Column, Integer, Unicode
 from sqlalchemy.ext.declarative import declarative_base
-
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.orm.exc import NoResultFound
 
-from sqlalchemy import Column, Integer, Unicode
-
-from zope.sqlalchemy import ZopeTransactionExtension
-
-from midget.lib import base36decode
-
-#DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 DBSession = scoped_session(sessionmaker())
 Base = declarative_base()
 
@@ -34,7 +23,7 @@ class Root(object):
         self.request = request
 
     def __getitem__(self, key):
-        session= DBSession()
+        session = DBSession()
         try:
             id = base36decode(key)
         except:
@@ -60,7 +49,7 @@ class Root(object):
         return item
 
     def __iter__(self):
-        session= DBSession()
+        session = DBSession()
         query = session.query(ShortURL)
         DBSession.remove()
         return iter(query)
