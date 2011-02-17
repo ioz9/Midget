@@ -9,7 +9,7 @@ requires = [
     'pyramid',
     'sqlalchemy',
     'WebError',
-    "nose"]
+    "nose", "beaker"]
 
 setup(name='Midget',
       version='0.10',
