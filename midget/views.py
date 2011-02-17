@@ -8,7 +8,6 @@ def index(request):
     return {}
 
 def redirect(context, request):
-    return Response(context.url)
     return HTTPFound(location=context.url)
 
 def api(request):

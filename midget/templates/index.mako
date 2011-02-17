@@ -8,7 +8,8 @@
             google.load("jquery", "1.5.0")
             google.setOnLoadCallback(function() {
                 $('input[type=text]').focus(function(){ $(this).val(''); });
-                $('input[type=submit]').click(function() {
+                
+                $('#form').submit(function(){
                     var url = $('input[type=text]').val();
                     $('#result').css("text-align", "center");
 
@@ -16,6 +17,7 @@
                         $('#result').html('<a href="'+ data +'">'+data+'</a>');
                     })
                     .error(function(data) { $('#result').html(data.responseText); });
+                    return false;
                 });
             });
         </script>
@@ -28,8 +30,10 @@
 
         <div id="container">
             <div id="result">
-                <input type="text" name="url" value="Enter URL" />
-                <input type="submit" value="Create" />
+                <form id="form">
+                    <input type="text" name="url" value="Enter URL" />
+                    <input type="submit" value="Create" />
+                </form>
             </div>
         </div>
     </body>
