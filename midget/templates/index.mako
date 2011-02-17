@@ -12,7 +12,6 @@
                 
                 $('#form').submit(function(){
                     var url = $('input[type=text]').val();
-                    alert(url);
                     $('#result').css("text-align", "center");
 
                     $.post('/api', {url: url}, function(data) {
