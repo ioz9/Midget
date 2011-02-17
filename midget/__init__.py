@@ -2,7 +2,7 @@ from midget.models import root_factory_maker, DBSession
 from pyramid.config import Configurator
 from sqlalchemy import engine_from_config
 
-__version__ = '0.6'
+__version__ = '0.7'
 
 class SessionRemoverMiddleware(object):
     def __init__(self, app):

@@ -12,6 +12,7 @@
                 
                 $('#form').submit(function(){
                     var url = $('input[type=text]').val();
+                    alert(url);
                     $('#result').css("text-align", "center");
 
                     $.post('/api', {url: url}, function(data) {
@@ -25,6 +26,10 @@
     </head>
 
     <body>
+        <header>
+            Hey! kan.gd is <a href="http://github.com/ctso/Midget" target="_blank">open source</a>!  Contribute to make it better.
+        </header>
+        
         <section id="sky">
             <img id="duck" src="/static/duck256.png" />
         </section>

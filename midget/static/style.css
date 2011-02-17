@@ -1,7 +1,10 @@
+@import url('/static/reset.css');
+
 body {
     margin: 0;
     padding: 0;
     background: #f0f0f0 url('/static/grass.jpg');
+    text-align: center;
 }
 
 section#sky {
@@ -33,4 +36,12 @@ section#container section {
 section#container section input {
     border: 1px solid black;
     padding: 2px;
+}
+
+header {
+    position: absolute;
+    top: 10px;
+    color: #000;
+    width: 100%;
+    font-size: 1.1em;
 }
